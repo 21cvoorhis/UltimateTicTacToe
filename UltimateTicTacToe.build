@@ -1,4 +1,4 @@
-﻿{
+{
 	"id": "ultimatetictactoe",
 	"title": "Ultimate Tic Tac Toe",
 	"description": "Tic Tac Toe but cooler.",
@@ -23,7 +23,7 @@
 	"guidseed": "com.twocansandstring.demos.SimpleProject,v1,%TARGET_NAME%",
 	
 	"vars": [
-		{ "name": "screen_width", "value": 800 },
+		{ "name": "screen_width", "value": 600 },
 		{ "name": "screen_height", "value": 600 },
 		{ "name": "use_beta_endpoint", "value": false },
 		{ "name": "game_title", "value": "Ultimate Tic Tac Toe" },
