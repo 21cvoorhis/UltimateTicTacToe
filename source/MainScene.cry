@@ -1,20 +1,73 @@
+//Graphics2D.Draw.line(x1, y1, x2, y2, thick, r, g, b);
 import Graphics2D;
 import Math;
 import Random;
 import TwoCansAlpha4;
 
+const WINDOW_SIZE = 600;
+
+enum BoardState{
+	X,
+	O,
+	TIE,
+	NEUTRAL
+}
+
+function point(start, add){
+	return (((start+add)*WINDOW_SIZE)/35);
+}
+
 class Board {
+	field board;
+	field corner;
+	field state = BoardState.NEUTRAL;
 	
+	constructor(corner){
+		this.board = [[" "," "," "],[" "," "," "],[" "," "," "]];
+		this.corner = corner;
+	}
+	
+	function checkWinner(){
+		//stuff
+		return null;
+	}
+	
+	function printBoard(){
+		
+		//draw lines
+		//Graphics2D.Draw.line(x1, y1, x2, y2, 3, 0, 0, 0);
+		Graphics2D.Draw.line(point(this.corner["x"],3),point(this.corner["y"],0),point(this.corner["x"],3),point(this.corner["y"],9), 3, 127, 127, 127);
+		Graphics2D.Draw.line(point(this.corner["x"],6),point(this.corner["y"],0),point(this.corner["x"],6),point(this.corner["y"],9), 3, 127, 127, 127);
+		Graphics2D.Draw.line(point(this.corner["x"],0),point(this.corner["y"],3),point(this.corner["x"],9),point(this.corner["y"],3), 3, 127, 127, 127);
+		Graphics2D.Draw.line(point(this.corner["x"],0),point(this.corner["y"],6),point(this.corner["x"],9),point(this.corner["y"],6), 3, 127, 127, 127);
+		return null;
+	}
 }
 
 class MainScene : AbstractScene {
 	
-
-	field windowSize = {"x": 600.0, "y": 600.0};
-	field boards = [];
+	field boards;
+	field board1;
+	field board2;
+	field board3;
+	field board4;
+	field board5;
+	field board6;
+	field board7;
+	field board8;
+	field board9;
 	
 	constructor() : base() {
-		
+		this.board1 = new Board({"x": 2, "y": 2});
+		this.board2 = new Board({"x": 13, "y": 2});
+		this.board3 = new Board({"x": 24, "y": 2});
+		this.board4 = new Board({"x": 2, "y": 13});
+		this.board5 = new Board({"x": 13, "y": 13});
+		this.board6 = new Board({"x": 24, "y": 13});
+		this.board7 = new Board({"x": 2, "y": 24});
+		this.board8 = new Board({"x": 13, "y": 24});
+		this.board9 = new Board({"x": 24, "y": 24});
+		this.boards = [[this.board1, this.board2, this.board3], [this.board4, this.board5, this.board6], [this.board7, this.board8, this.board9]];
 	}
 	
 	function update(inputManager, events) {
@@ -29,7 +82,12 @@ class MainScene : AbstractScene {
 	
 	function render() {
 		Graphics2D.Draw.fill(255,255,255);
-		Graphics2D.Draw.line(0,0,600,600,20,0,0,0);
 		
+		//print board lines
+		for(row : this.boards){
+			for(tile : row){
+				tile.printBoard();
+			}
+		}
 	}
 }
