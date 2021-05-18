@@ -6,24 +6,56 @@ import TwoCansAlpha4;
 
 const WINDOW_SIZE = 600;
 
-enum BoardState{
+enum State{
 	X,
 	O,
 	TIE,
 	NEUTRAL
 }
 
-function point(start, add){
-	return (((start+add)*WINDOW_SIZE)/35);
+function grid(start){
+	return ((start*WINDOW_SIZE)/35);
 }
 
-class Board {
+class Tile{
+	
+	field state;
+	field point;
+	
+	constructor(point){
+		this.state = State.NEUTRAL;
+		this.point = point;
+	}
+	
+}
+
+class Board{
+	
 	field board;
+	field tile1;
+	field tile2;
+	field tile3;
+	field tile4;
+	field tile5;
+	field tile6;
+	field tile7;
+	field tile8;
+	field tile9;
 	field corner;
-	field state = BoardState.NEUTRAL;
+	field state = State.NEUTRAL;
 	
 	constructor(corner){
-		this.board = [[" "," "," "],[" "," "," "],[" "," "," "]];
+		this.tile1 = new Tile(corner);
+		this.tile2 = new Tile({"x": grid(corner["x"]+3), "y": corner["y"]});
+		this.tile3 = new Tile({"x": grid(corner["x"]+6), "y": corner["y"]});
+		this.tile4 = new Tile({"x": corner["x"], "y": grid(corner["y"]+3)});
+		this.tile5 = new Tile({"x": grid(corner["x"]+3), "y": grid(corner["y"]+3)});
+		this.tile6 = new Tile({"x": grid(corner["x"]+6), "y": grid(corner["y"]+3)});
+		this.tile7 = new Tile({"x": corner["x"], "y": grid(corner["y"]+6)});
+		this.tile8 = new Tile({"x": grid(corner["x"]+3), "y": grid(corner["y"]+6)});
+		this.tile9 = new Tile({"x": grid(corner["x"]+6), "y": grid(corner["y"]+6)});
+		
+		this.board = [this.tile1, this.tile2, this.tile3, this.tile4, this.tile5, this.tile6,this.tile7, this.tile8, this.tile9];
 		this.corner = corner;
 	}
 	
@@ -36,10 +68,15 @@ class Board {
 		
 		//draw lines
 		//Graphics2D.Draw.line(x1, y1, x2, y2, 3, 0, 0, 0);
-		Graphics2D.Draw.line(point(this.corner["x"],3),point(this.corner["y"],0),point(this.corner["x"],3),point(this.corner["y"],9), 3, 127, 127, 127);
-		Graphics2D.Draw.line(point(this.corner["x"],6),point(this.corner["y"],0),point(this.corner["x"],6),point(this.corner["y"],9), 3, 127, 127, 127);
-		Graphics2D.Draw.line(point(this.corner["x"],0),point(this.corner["y"],3),point(this.corner["x"],9),point(this.corner["y"],3), 3, 127, 127, 127);
-		Graphics2D.Draw.line(point(this.corner["x"],0),point(this.corner["y"],6),point(this.corner["x"],9),point(this.corner["y"],6), 3, 127, 127, 127);
+		Graphics2D.Draw.line(grid(this.corner["x"]+3),grid(this.corner["y"]+0),grid(this.corner["x"]+3),grid(this.corner["y"]+9), 3, 127, 127, 127);
+		Graphics2D.Draw.line(grid(this.corner["x"]+6),grid(this.corner["y"]+0),grid(this.corner["x"]+6),grid(this.corner["y"]+9), 3, 127, 127, 127);
+		Graphics2D.Draw.line(grid(this.corner["x"]+0),grid(this.corner["y"]+3),grid(this.corner["x"]+9),grid(this.corner["y"]+3), 3, 127, 127, 127);
+		Graphics2D.Draw.line(grid(this.corner["x"]+0),grid(this.corner["y"]+6),grid(this.corner["x"]+9),grid(this.corner["y"]+6), 3, 127, 127, 127);
+		return null;
+	}
+	
+	function drawX(point){
+		//thing
 		return null;
 	}
 }
@@ -67,7 +104,7 @@ class MainScene : AbstractScene {
 		this.board7 = new Board({"x": 2, "y": 24});
 		this.board8 = new Board({"x": 13, "y": 24});
 		this.board9 = new Board({"x": 24, "y": 24});
-		this.boards = [[this.board1, this.board2, this.board3], [this.board4, this.board5, this.board6], [this.board7, this.board8, this.board9]];
+		this.boards = [this.board1, this.board2, this.board3, this.board4, this.board5, this.board6, this.board7, this.board8, this.board9];
 	}
 	
 	function update(inputManager, events) {
@@ -89,5 +126,10 @@ class MainScene : AbstractScene {
 				tile.printBoard();
 			}
 		}
+		Graphics2D.Draw.line(grid(1+11),grid(1+0),grid(1+11),grid(1+33), 5, 0, 0, 0);
+		Graphics2D.Draw.line(grid(1+22),grid(1+0),grid(1+22),grid(1+33), 5, 0, 0, 0);
+		Graphics2D.Draw.line(grid(1+0),grid(1+11),grid(1+33),grid(1+11), 5, 0, 0, 0);
+		Graphics2D.Draw.line(grid(1+0),grid(1+22),grid(1+33),grid(1+22), 5, 0, 0, 0);
+		
 	}
 }
