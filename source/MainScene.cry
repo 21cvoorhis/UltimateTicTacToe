@@ -76,8 +76,8 @@ class Board{
 	}
 	
 	function drawX(point){
-		//thing
-		return null;
+		Graphics2D.Draw.line(grid(point["x"]-0.8), grid(point["y"]-0.8), grid(point["x"]+0.8), grid(point["y"]+0.8), 5, 0, 0, 255);
+		Graphics2D.Draw.line(grid(point["x"]-0.8), grid(point["y"]+0.8), grid(point["x"]+0.8), grid(point["y"]-0.8), 5, 0, 0, 255);
 	}
 }
 
@@ -121,15 +121,13 @@ class MainScene : AbstractScene {
 		Graphics2D.Draw.fill(255,255,255);
 		
 		//print board lines
-		for(row : this.boards){
-			for(tile : row){
-				tile.printBoard();
-			}
+		for(b : this.boards){
+			b.printBoard();
 		}
 		Graphics2D.Draw.line(grid(1+11),grid(1+0),grid(1+11),grid(1+33), 5, 0, 0, 0);
 		Graphics2D.Draw.line(grid(1+22),grid(1+0),grid(1+22),grid(1+33), 5, 0, 0, 0);
 		Graphics2D.Draw.line(grid(1+0),grid(1+11),grid(1+33),grid(1+11), 5, 0, 0, 0);
 		Graphics2D.Draw.line(grid(1+0),grid(1+22),grid(1+33),grid(1+22), 5, 0, 0, 0);
-		
+		this.boards[0].drawX({"x": 3.5, "y": 3.5});
 	}
 }
