@@ -20,7 +20,7 @@
 		{ "id": "twocans_everything", "prefix": "*" }
 	],
 	
-	"guidseed": "com.twocansandstring.demos.SimpleProject,v1,%TARGET_NAME%",
+	"guidseed": "com.twocansandstring.users.F1J7.uttt",
 	
 	"vars": [
 		{ "name": "screen_width", "value": 600 },
